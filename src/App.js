@@ -14,14 +14,19 @@ const App = () => {
   const idUpdate = (e) => setId(e.target.value);
   const titleUpdate = (e) => setTitle(e.target.value);
   const bodyUpdate = (e) => setBody(e.target.value);
-  return <>
 
+  const addPost = () => {
+    const newPost = [{userId : userId, id : id, title: title, body: body}];
+    setPosts([...posts,...newPost]);
+  }
+  
+  return <>
   <div>
     <h1>Blog App</h1>
     {posts.map((element, index) => {
       return <div> <h1 key = {index}> {element.title} {element.body} </h1> </div>
     })}
-    <button>Add</button>
+    <button onClick= {addPost}>Add</button>
     <input onChange={userIdUpdate} type= 'text' placeholder='Enter userId Here'></input>
     <input onChange={idUpdate} type= 'text' placeholder='Enter id Here'></input>
     <input onChange={titleUpdate} type= 'text' placeholder='Enter title Here'></input>
