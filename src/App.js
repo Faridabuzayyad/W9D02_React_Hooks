@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 
 
 // jsx
@@ -20,6 +21,21 @@ const App = () => {
     setPosts([...posts,...newPost]);
   }
   
+  useEffect(() => {
+    getPosts();
+  }, []);
+
+  const getPosts = () => {
+    axios
+      .get(`https://jsonplaceholder.typicode.com/posts`)
+      .then((response) => {
+        console.log('Posts: ', response.data);
+        setPosts(response.data);
+      })
+      .catch((err) => {
+        console.log('ERR: ', err);
+      });
+  };
   return <>
   <div>
     <h1>Blog App</h1>
